@@ -14,7 +14,7 @@ This is a simple React app that allows users to search for Amazon products by ke
 
 ### Prerequisites
 
-- Node.js and npm installed on your machine
+- bun installed on your machine
 - Backend API running locally on `http://localhost:3333/api/aceprs`
 
 ### Installation
