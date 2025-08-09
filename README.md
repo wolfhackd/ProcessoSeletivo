@@ -21,8 +21,8 @@ This is a simple React app that allows users to search for Amazon products by ke
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/amazon-product-scraper.git
-   cd amazon-product-scraper
+   git clone https://github.com/wolfhackd/ProcessoSeletivo.git
+   cd ProcessoSeletivo
    ```
 
 ## Start a Project:
