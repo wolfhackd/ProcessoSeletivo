@@ -1,28 +1,34 @@
 const express = require('express');
 const axios = require('axios');
 const { JSDOM } = require('jsdom');
+const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.use(cors({ origin: 'http://localhost:3000' }));
+const PORT = process.env.PORT || 3333;
 
-app.get('/api/aceprs', async (req, res) => {
+app.get('/api/aceprs', async (req: any, res: any) => {
   const keyword = req.query.keyword as string;
 
+  //Ensures that keyword exists
   if (!keyword) {
     return res.status(400).json({ error: 'Keyword is required' });
   }
-
+  //URL
   const url = `https://www.amazon.com/s?k=${encodeURIComponent(keyword)}`;
 
   try {
+    // Download HTMl Page
     const response = await axios.get(url);
-    //Talvez eu precise colocar um header aqui tenho que vê os docs
 
+    //Use JSOM to extract HTML items
     const dom = new JSDOM(response.data);
     const document = dom.window.document;
 
+    //Select the div with all items
     const items = document.querySelectorAll('[data-component-type="s-search-result"]');
 
+    //Transforming the list of items into an Array to send via the API to the front end
     const results = Array.from(items).map((item: any) => {
       const title = item.querySelector('h2 span')?.textContent?.trim() || 'N/A';
       const rating =
